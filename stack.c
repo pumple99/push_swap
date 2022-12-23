@@ -6,7 +6,7 @@
 /*   By: seunghoy <seunghoy@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 19:17:35 by seunghoy          #+#    #+#             */
-/*   Updated: 2022/12/21 20:44:43 by seunghoy         ###   ########.fr       */
+/*   Updated: 2022/12/23 18:52:47 by seunghoy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ t_stack	*make_stack(void)
 
 	s = (t_stack *)malloc(sizeof(t_stack));
 	s->top = 0;
-	s->last = 0;
 	s->arg_num = 0;
 }
 
@@ -40,10 +39,10 @@ void	insert_stack(t_stack *s, int num)
 		n->prev = n;
 		n->next = n;
 	}
+	n->next = s->top->next;
 	s->top->next = n;
-	s->last->prev = n;
 	n->prev = s->top;
-	n->next = s->last;
+	n->next->prev = n;
 	s->top = n;
 	(s->arg_num)++;
 }
@@ -53,15 +52,15 @@ int	pop_stack(t_stack *s)
 	t_node	*n;
 	int		num;
 
-	if (is_stack_empty(s))
-		return (0);
 	n = s->top;
 	s->top = n->prev;
-	s->top->next = s->last;
-	s->last->prev = s->top;
+	s->top->next = n->next;
+	n->next->prev = s->top;
 	(s->arg_num)--;
 	num = n->num;
 	free(n);
+	if (s->arg_num == 0)
+		s->top = 0;
 	return (num);
 }
 
