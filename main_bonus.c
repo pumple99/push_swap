@@ -6,7 +6,7 @@
 /*   By: seunghoy <seunghoy@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 19:33:47 by seunghoy          #+#    #+#             */
-/*   Updated: 2022/12/23 21:35:31 by seunghoy         ###   ########.fr       */
+/*   Updated: 2023/01/06 20:59:25 by seunghoy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@ static int	is_complete(t_stack *a, t_stack *b)
 	return (1);
 }
 
-static void	exe_or_exit(t_stack *a, t_stack *b, char temp[])
+static void	exe_or_exit(t_stack *a, t_stack *b, char temp[], t_sort *arr)
 {
 	if (!ft_strncmp(temp, "sa", 3))
 		swap(a);
 	else if (!ft_strncmp(temp, "sb", 3))
 		swap(b);
 	else if (!ft_strncmp(temp, "ss", 3))
-		swap(a) && swap(b);
+		(swap(a) && swap(b));
 	else if (!ft_strncmp(temp, "pa", 3))
 		push(b, a);
 	else if (!ft_strncmp(temp, "pb", 3))
@@ -51,15 +51,15 @@ static void	exe_or_exit(t_stack *a, t_stack *b, char temp[])
 	else if (!ft_strncmp(temp, "rb", 3))
 		rotate(b);
 	else if (!ft_strncmp(temp, "rr", 3))
-		rotate(a) && rotate(b);
+		(rotate(a) && rotate(b));
 	else if (!ft_strncmp(temp, "rra", 4))
 		rrotate(a);
 	else if (!ft_strncmp(temp, "rrb", 4))
 		rrotate(b);
 	else if (!ft_strncmp(temp, "rrr", 4))
-		rrotate(a) && rrotate(b);
+		(rrotate(a) && rrotate(b));
 	else
-		print_error_exit();
+		print_error_exit(a, b, arr);
 }
 
 static void	delete_nl(char temp[], char *input)
@@ -72,13 +72,13 @@ static void	delete_nl(char temp[], char *input)
 		if (input[idx] != '\n')
 			temp[idx] = input[idx];
 		else
-			break;
+			break ;
 		idx++;
 	}
 	temp[idx] = 0;
 }
 
-static void	exe_input_op(t_stack *a, t_stack *b)
+static void	exe_input_op(t_stack *a, t_stack *b, t_sort *arr)
 {
 	char	*in;
 	char	temp[5];
@@ -88,7 +88,7 @@ static void	exe_input_op(t_stack *a, t_stack *b)
 	{
 		delete_nl(temp, in);
 		free(in);
-		exe_or_exit(a, b, temp);
+		exe_or_exit(a, b, temp, arr);
 		in = get_next_line(0);
 	}
 	if (is_complete(a, b))
@@ -101,24 +101,21 @@ int	main(int argc, char *argv[])
 {
 	t_stack	*a;
 	t_stack	*b;
-	int		*arr;
-	int		num;
+	t_sort	*arr;
 	int		idx;
 
 	if (argc < 2)
 		return (0);
 	a = make_stack();
 	b = make_stack();
-	arr = (int *)malloc(sizeof(int) * (argc - 1));
-	idx = 0;
-	while (argc > 1)
-	{
-		num = atoi_or_exit(argv[--argc]);
-		insert_stack(a, num);
-		arr[idx++] = num;
-	}
-	exit_if_dup(arr, idx);
-	exe_input_op(a, b);
-	delete_stack(a);
-	delete_stack(b);
+	arr = (t_sort *)malloc(sizeof(t_sort) * (argc - 1));
+	idx = -1;
+	while (++idx + 1 < argc)
+		arr[idx].num[0] = atoi_or_exit(argv[argc - idx - 1], a, b, arr);
+	find_idx_check_dup(idx, a, b, arr);
+	idx = -1;
+	while (++idx + 1 < argc)
+		insert_stack(a, arr[idx].num[0], arr[idx].num[2]);
+	exe_input_op(a, b, arr);
+	clean_all(a, b, arr);
 }

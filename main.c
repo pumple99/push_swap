@@ -16,14 +16,21 @@ int	main(int argc, char *argv[])
 {
 	t_stack	*a;
 	t_stack	*b;
-	int		input;
+	t_sort	*arr;
+	int		idx;
 
-	input = 0;
+	if (argc < 2)
+		return (0);
 	a = make_stack();
 	b = make_stack();
-	while (argc > 1)
-		insert_stack(a, atoi_or_exit(argv[--argc]));
-	//not yet
-	delete_stack(a);
-	delete_stack(b);
+	arr = (t_sort *)malloc(sizeof(t_sort) * (argc - 1));
+	idx = -1;
+	while (++idx + 1 < argc)
+		arr[idx].num[0] = atoi_or_exit(argv[argc - idx - 1], a, b, arr);
+	find_idx_check_dup(idx, a, b, arr);
+	idx = -1;
+	while (++idx + 1 < argc)
+		insert_stack(a, arr[idx].num[0], arr[idx].num[2]);
+	
+	clean_all(a, b, arr);
 }

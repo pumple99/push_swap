@@ -13,9 +13,16 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
+//arr[0] = num, arr[1] = input_idx, arr[2] = sort_idx
+typedef struct s_sort
+{
+	int	num[3];
+}	t_sort;
+
 typedef struct s_node
 {
 	int				num;
+	int				idx;
 	struct s_node	*prev;
 	struct s_node	*next;
 }	t_node;
@@ -26,18 +33,32 @@ typedef struct s_stack
 	int		arg_num;
 }	t_stack;
 
-//error.c
-void	print_error_exit(void);
+typedef enum pos
+{
+	a_top = 0,
+	a_bottom,
+	b_top,
+	b_bottom
+}	t_pos;
+
+typedef struct s_tree
+{
+	//
+}	t_tree;
+
+//exit.c
+void	print_error_exit(t_stack *a, t_stack *b, t_sort *arr);
+void	clean_all(t_stack *a, t_stack *b, t_sort *arr);
 
 //input.c
-int		atoi_or_exit(const char *str);
-void	exit_if_dup(int *arr, int num);
+int		atoi_or_exit(const char *str, t_stack *a, t_stack *b, t_sort *arr);
+void	find_idx_check_dup(int total, t_stack *a, t_stack *b, t_sort *arr);
 
 //stack.c
 t_stack	*make_stack(void);
 int		is_stack_empty(t_stack *s);
-void	insert_stack(t_stack *s, int num);
-int		pop_stack(t_stack *s);
+void	insert_stack(t_stack *s, int num, int idx);
+t_sort	pop_stack(t_stack *s);
 void	delete_stack(t_stack *s);
 
 //operation.c

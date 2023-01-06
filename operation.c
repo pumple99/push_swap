@@ -38,12 +38,12 @@ int	swap(t_stack *s)
 
 int	push(t_stack *src, t_stack *dest)
 {
-	int	num;
+	t_sort	num;
 
 	if (is_stack_empty(src))
 		return (1);
 	num = pop_stack(src);
-	insert_stack(dest, num);
+	insert_stack(dest, num.num[0], num.num[2]);
 	return (1);
 }
 

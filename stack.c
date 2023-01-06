@@ -30,12 +30,13 @@ int	is_stack_empty(t_stack *s)
 	return (0);
 }
 
-void	insert_stack(t_stack *s, int num)
+void	insert_stack(t_stack *s, int num, int idx)
 {
 	t_node	*n;
 
 	n = (t_node *)malloc(sizeof(t_node));
 	n->num = num;
+	n->idx = idx;
 	if (is_stack_empty(s))
 	{
 		n->prev = n;
@@ -52,17 +53,18 @@ void	insert_stack(t_stack *s, int num)
 	(s->arg_num)++;
 }
 
-int	pop_stack(t_stack *s)
+t_sort	pop_stack(t_stack *s)
 {
 	t_node	*n;
-	int		num;
+	t_sort	num;
 
 	n = s->top;
 	s->top = n->prev;
 	s->top->next = n->next;
 	n->next->prev = s->top;
 	(s->arg_num)--;
-	num = n->num;
+	num.num[0] = n->num;
+	num.num[2] = n->idx;
 	free(n);
 	if (s->arg_num == 0)
 		s->top = 0;

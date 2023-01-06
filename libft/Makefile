@@ -6,13 +6,14 @@
 #    By: seunghoy <seunghoy@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 16:45:12 by seunghoy          #+#    #+#              #
-#    Updated: 2022/12/26 16:53:23 by seunghoy         ###   ########.fr        #
+#    Updated: 2023/01/06 20:03:47 by seunghoy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 CC = cc
 CFLAGS = -Werror -Wall -Wextra
+DEBUG_FLAGS = -g
 SRCS = ft_isalpha.c \
        ft_memcpy.c \
        ft_strlcpy.c \
@@ -76,7 +77,7 @@ $(NAME) : $(OBJS)
 all : $(NAME)
 
 %.o : %.c
-	$(CC) $(CFLAGS) -c -I. -MMD $< -g
+	$(CC) $(CFLAGS) -c -I. -MMD $< $(DEBUG_FLAGS)
 
 clean :
 	rm -rf $(OBJS) $(DEPS)

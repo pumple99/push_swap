@@ -6,7 +6,7 @@
 #    By: seunghoy <seunghoy@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/08 15:20:31 by seunghoy          #+#    #+#              #
-#    Updated: 2022/12/21 17:23:42 by seunghoy         ###   ########.fr        #
+#    Updated: 2023/01/06 20:25:43 by seunghoy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,11 @@ NAME = push_swap
 BONUS = checker
 CC = cc
 CFLAGS = -Werror -Wall -Wextra
+DEBUG_FLAGS = -g
 LIB = libft.a
 LIB_DIR = ./libft
 
-SRCS_C = error.c input.c operation.c stack.c
+SRCS_C = exit.c input.c operation.c stack.c
 
 SRCS_B = main_bonus.c
 
@@ -41,10 +42,10 @@ bonus : $(LIB)
 	make bonus_temp
 
 bonus_temp : $(OBJS_B) $(OBJS_C)
-	$(CC) $(CFLAGS) -I. -I$(LIB_DIR) -MMD -o $(BONUS) $^ $(LIB) -g
+	$(CC) $(CFLAGS) -I. -I$(LIB_DIR) -MMD -o $(BONUS) $^ $(LIB) $(DEBUG_FLAGS)
 
 %.o : %.c
-	$(CC) $(CFLAGS) -c -I. -MMD $< -g
+	$(CC) $(CFLAGS) -c -I. -MMD $< $(DEBUG_FLAGS)
 
 $(LIB) :
 	make -C $(LIB_DIR) all
