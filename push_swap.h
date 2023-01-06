@@ -26,8 +26,12 @@ typedef struct s_stack
 	int		arg_num;
 }	t_stack;
 
+//error.c
+void	print_error_exit(void);
+
 //input.c
 int		atoi_or_exit(const char *str);
+void	exit_if_dup(int *arr, int num);
 
 //stack.c
 t_stack	*make_stack(void);
@@ -37,9 +41,9 @@ int		pop_stack(t_stack *s);
 void	delete_stack(t_stack *s);
 
 //operation.c
-void	swap(t_stack *s);
-void	push(t_stack *src, t_stack *dest);
-void	rotate(t_stack *s);
-void	rrotate(t_stack *s);
+int		swap(t_stack *s);
+int		push(t_stack *src, t_stack *dest);
+int		rotate(t_stack *s);
+int		rrotate(t_stack *s);
 
 #endif

@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "push_swap.h"
 
 t_stack	*make_stack(void)
@@ -19,6 +20,7 @@ t_stack	*make_stack(void)
 	s = (t_stack *)malloc(sizeof(t_stack));
 	s->top = 0;
 	s->arg_num = 0;
+	return (s);
 }
 
 int	is_stack_empty(t_stack *s)
@@ -39,10 +41,13 @@ void	insert_stack(t_stack *s, int num)
 		n->prev = n;
 		n->next = n;
 	}
-	n->next = s->top->next;
-	s->top->next = n;
-	n->prev = s->top;
-	n->next->prev = n;
+	else
+	{
+		n->next = s->top->next;
+		s->top->next = n;
+		n->prev = s->top;
+		n->next->prev = n;
+	}
 	s->top = n;
 	(s->arg_num)++;
 }

@@ -11,18 +11,19 @@
 # **************************************************************************** #
 
 NAME = push_swap
+BONUS = checker
 CC = cc
 CFLAGS = -Werror -Wall -Wextra
 LIB = libft.a
 LIB_DIR = ./libft
 
-SRCS = 
+SRCS_C = error.c input.c operation.c stack.c
 
-SRCS_B =
+SRCS_B = main_bonus.c
 
-OBJS = $(SRCS:.c=.o)
+OBJS_C = $(SRCS_C:.c=.o)
 OBJS_B = $(SRCS_B:.c=.o)
-DEPS = $(OBJS:.o=.d) $(OBJS_B:.o=.d)
+DEPS = $(OBJS_C:.o=.d) $(OBJS_B:.o=.d) $(BONUS).d
 
 all : $(LIB)
 	rm -f $(NAME)
@@ -37,17 +38,13 @@ all_temp : $(OBJS)
 $(NAME) : all
 
 bonus : $(LIB)
-	rm -f $(NAME)
-	cp $(LIB) $(NAME)
 	make bonus_temp
 
-bonus_temp : $(OBJS_B)
-	ar -rcs $(NAME) $(OBJS_B)
-	rm -f all
-	touch bonus
+bonus_temp : $(OBJS_B) $(OBJS_C)
+	$(CC) $(CFLAGS) -I. -I$(LIB_DIR) -MMD -o $(BONUS) $^ $(LIB) -g
 
 %.o : %.c
-	$(CC) $(CFLAGS) -c -I. -MMD $<
+	$(CC) $(CFLAGS) -c -I. -MMD $< -g
 
 $(LIB) :
 	make -C $(LIB_DIR) all
@@ -55,11 +52,11 @@ $(LIB) :
 
 clean :
 	make -C $(LIB_DIR) clean
-	rm -rf $(OBJS) $(OBJS_B) all bonus $(LIB) $(DEPS)
+	rm -rf $(OBJS_C) $(OBJS_B) $(LIB) $(DEPS)
 
 fclean : clean
 	make -C $(LIB_DIR) fclean
-	rm -rf $(NAME)
+	rm -rf $(NAME) $(BONUS)
 
 re :
 	make fclean

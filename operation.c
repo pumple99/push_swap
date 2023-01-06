@@ -12,46 +12,53 @@
 
 #include "push_swap.h"
 
-void	swap(t_stack *s)
+int	swap(t_stack *s)
 {
-	t_node	last;
-	t_node	new_top;
+	t_node	*last;
+	t_node	*new_top;
 
 	if (s->arg_num < 2)
-		return ;
+		return (1);
 	else if (s->arg_num == 2)
+	{
 		s->top = s->top->next;
+		return (1);
+	}
 	new_top = s->top->prev;
 	new_top->prev->next = s->top;
 	last = s->top->next;
 	last->prev = new_top;
 	s->top->next = new_top;
-	s->top->prev = new-top->prev;
+	s->top->prev = new_top->prev;
 	new_top->next = last;
 	new_top->prev = s->top;
 	s->top = new_top;
+	return (1);
 }
 
-void	push(t_stack *src, t_stack *dest)
+int	push(t_stack *src, t_stack *dest)
 {
 	int	num;
 
 	if (is_stack_empty(src))
-		return ;
+		return (1);
 	num = pop_stack(src);
 	insert_stack(dest, num);
+	return (1);
 }
 
-void	rotate(t_stack *s)
+int	rotate(t_stack *s)
 {
 	if (s->arg_num < 2)
-		return ;
+		return (1);
 	s->top = s->top->prev;
+	return (1);
 }
 
-void	rrotate(t_stack *s)
+int	rrotate(t_stack *s)
 {
 	if (s->arg_num < 2)
-		return ;
+		return (1);
 	s->top = s->top->next;
+	return (1);
 }
