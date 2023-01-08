@@ -32,5 +32,5 @@ int	main(int argc, char *argv[])
 	while (++idx + 1 < argc)
 		insert_stack(a, arr[idx].num[0], arr[idx].num[2]);
 	
-	clean_all(a, b, arr);
+	clean_stack_sort(a, b, arr);
 }
