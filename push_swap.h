@@ -36,17 +36,35 @@ typedef struct s_stack
 typedef enum pos
 {
 	a_top = 0,
-	a_bottom,
+	a_bot,
 	b_top,
-	b_bottom
+	b_bot
 }	t_pos;
 
 typedef struct s_block
 {
 	int		start;
 	int		end;
+	int		count;
+	int		p1;
+	int		p2;
 	t_pos	pos;
 }	t_block;
+
+//pile.c
+int		pile_print(t_stack *a, t_stack *b, t_block blo);
+void	pile_atop(t_stack *a, t_stack *b, t_block blo);
+void	pile_abot(t_stack *a, t_stack *b, t_block blo);
+
+//pile2.c
+void	pile_btop(t_stack *a, t_stack *b, t_block blo);
+void	pile_bbot(t_stack *a, t_stack *b, t_block blo);
+
+//sort.c
+int		sort_ps(t_stack *a, t_stack *b, t_block blo);
+
+//trisection.c
+void	trisec_print(t_stack *a, t_stack *b, t_block blo);
 
 //exit.c
 void	print_error_exit(t_stack *a, t_stack *b, t_sort *arr);
@@ -66,7 +84,7 @@ void	delete_stack(t_stack *s);
 //operation.c
 int		swap(t_stack *s);
 int		push(t_stack *src, t_stack *dest);
-int		rotate(t_stack *s);
-int		rrotate(t_stack *s);
+int		ro(t_stack *s);
+int		rro(t_stack *s);
 
 #endif

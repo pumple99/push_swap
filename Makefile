@@ -19,22 +19,19 @@ LIB = libft.a
 LIB_DIR = ./libft
 
 SRCS_C = exit.c input.c operation.c stack.c
-
+SRCS_M = main.c sort.c trisection.c pile.c pile2.c
 SRCS_B = main_bonus.c
 
 OBJS_C = $(SRCS_C:.c=.o)
+OBJS_M = $(SRCS_M:.c=.o)
 OBJS_B = $(SRCS_B:.c=.o)
-DEPS = $(OBJS_C:.o=.d) $(OBJS_B:.o=.d) $(BONUS).d
+DEPS = $(OBJS_C:.o=.d) $(OBJS_B:.o=.d) $(OBJS_M:.o=.d) $(BONUS).d $(NAME).d
 
 all : $(LIB)
-	rm -f $(NAME)
-	cp $(LIB) $(NAME)
 	make all_temp
 
-all_temp : $(OBJS)
-	ar -rcs $(NAME) $(OBJS) 
-	rm -f bonus
-	touch all
+all_temp : $(OBJS_M) $(OBJS_C)
+	$(CC) $(CFLAGS) -I. -I$(LIB_DIR) -MMD -o $(NAME) $^ $(LIB) $(DEBUG_FLAGS)
 
 $(NAME) : all
 

@@ -47,7 +47,7 @@ int	push(t_stack *src, t_stack *dest)
 	return (1);
 }
 
-int	rotate(t_stack *s)
+int	ro(t_stack *s)
 {
 	if (s->arg_num < 2)
 		return (1);
@@ -55,7 +55,7 @@ int	rotate(t_stack *s)
 	return (1);
 }
 
-int	rrotate(t_stack *s)
+int	rro(t_stack *s)
 {
 	if (s->arg_num < 2)
 		return (1);

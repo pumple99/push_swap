@@ -47,17 +47,17 @@ static void	exe_or_exit(t_stack *a, t_stack *b, char temp[], t_sort *arr)
 	else if (!ft_strncmp(temp, "pb", 3))
 		push(a, b);
 	else if (!ft_strncmp(temp, "ra", 3))
-		rotate(a);
+		ro(a);
 	else if (!ft_strncmp(temp, "rb", 3))
-		rotate(b);
+		ro(b);
 	else if (!ft_strncmp(temp, "rr", 3))
-		(rotate(a) && rotate(b));
+		(ro(a) && ro(b));
 	else if (!ft_strncmp(temp, "rra", 4))
-		rrotate(a);
+		rro(a);
 	else if (!ft_strncmp(temp, "rrb", 4))
-		rrotate(b);
+		rro(b);
 	else if (!ft_strncmp(temp, "rrr", 4))
-		(rrotate(a) && rrotate(b));
+		(rro(a) && rro(b));
 	else
 		print_error_exit(a, b, arr);
 }
