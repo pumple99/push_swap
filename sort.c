@@ -52,10 +52,12 @@ int	sort_ps(t_stack *a, t_stack *b, t_block blo)
 	blo.count = blo.end - blo.start + 1;
 	blo.p1 = blo.start + (int)((float)blo.count / 3) - 1;
 	blo.p2 = blo.start + (int)((float)blo.count / 3 * 2) - 1;
-	if (blo.count < 4)
-		return (pile_print(a, b, blo));
 	if (blo.pos == a_bot && a->arg_num == blo.count)
 		blo.pos = a_top;
+	if (blo.pos == b_bot && b->arg_num == blo.count)
+		blo.pos = b_top;
+	if (blo.count < 4)
+		return (pile_print(a, b, blo));
 	trisec_print(a, b, blo);
 	(blo_info_big(blo, &temp) && sort_ps(a, b, temp));
 	(blo_info_mid(blo, &temp) && sort_ps(a, b, temp));

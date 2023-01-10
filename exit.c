@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include "push_swap.h"
 
-void	clean_stack_sort(t_stack *a, t_stack *b, t_sort *arr)
+void	clean_all(t_stack *a, t_stack *b, t_sort *arr)
 {
 	free(arr);
 	delete_stack(a);
@@ -23,7 +23,7 @@ void	clean_stack_sort(t_stack *a, t_stack *b, t_sort *arr)
 
 void	print_error_exit(t_stack *a, t_stack *b, t_sort *arr)
 {
-	clean_stack_sort(a, b, arr);
+	clean_all(a, b, arr);
 	write(2, "Error\n", 6);
 	exit(1);
 }

@@ -68,7 +68,7 @@ void	trisec_print(t_stack *a, t_stack *b, t_block blo);
 
 //exit.c
 void	print_error_exit(t_stack *a, t_stack *b, t_sort *arr);
-void	clean_stack_sort(t_stack *a, t_stack *b, t_sort *arr);
+void	clean_all(t_stack *a, t_stack *b, t_sort *arr);
 
 //input.c
 int		atoi_or_exit(const char *str, t_stack *a, t_stack *b, t_sort *arr);

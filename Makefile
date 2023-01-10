@@ -50,7 +50,7 @@ $(LIB) :
 
 clean :
 	make -C $(LIB_DIR) clean
-	rm -rf $(OBJS_C) $(OBJS_B) $(LIB) $(DEPS)
+	rm -rf $(OBJS_C) $(OBJS_B) $(OBJS_M) $(LIB) $(DEPS)
 
 fclean : clean
 	make -C $(LIB_DIR) fclean

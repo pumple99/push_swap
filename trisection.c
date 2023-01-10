@@ -15,22 +15,24 @@
 
 static void	trisec_atop(t_stack *a, t_stack *b, t_block blo)
 {
-	int	idx;
+	int		idx;
+	t_node	*at;
 
 	idx = 0 - 1;
 	while (++idx < blo.count)
 	{
-		if (blo.p2 < a->top->idx)
+		at = a->top;
+		if (blo.p2 < at->idx)
 		{
 			ro(a);
 			ft_printf("ra\n");
 		}
-		else if (blo.p1 < a->top->idx && a->top->idx <= blo.p2)
+		else if (blo.p1 < at->idx && at->idx <= blo.p2)
 		{
 			push(a, b);
 			ft_printf("pb\n");
 		}
-		else if (a->top->idx <= blo.p1)
+		else if (at->idx <= blo.p1)
 		{
 			(push(a, b) && ro(b));
 			ft_printf("pb\nrb\n");
@@ -40,22 +42,24 @@ static void	trisec_atop(t_stack *a, t_stack *b, t_block blo)
 
 static void	trisec_abot(t_stack *a, t_stack *b, t_block blo)
 {
-	int	idx;
+	int		idx;
+	t_node	*ab;
 
 	idx = 0 - 1;
 	while (++idx < blo.count)
 	{
-		if (blo.p2 < a->top->idx)
+		ab = a->top->next;
+		if (blo.p2 < ab->idx)
 		{
 			rro(a);
 			ft_printf("rra\n");
 		}
-		else if (blo.p1 < a->top->idx && a->top->idx <= blo.p2)
+		else if (blo.p1 < ab->idx && ab->idx <= blo.p2)
 		{
 			(rro(a) && push(a, b));
 			ft_printf("rra\npb\n");
 		}
-		else if (a->top->idx <= blo.p1)
+		else if (ab->idx <= blo.p1)
 		{
 			(rro(a) && push(a, b) && ro(b));
 			ft_printf("rra\npb\nrb\n");
@@ -65,22 +69,24 @@ static void	trisec_abot(t_stack *a, t_stack *b, t_block blo)
 
 static void	trisec_btop(t_stack *a, t_stack *b, t_block blo)
 {
-	int	idx;
+	int		idx;
+	t_node	*bt;
 
 	idx = 0 - 1;
 	while (++idx < blo.count)
 	{
-		if (blo.p2 < a->top->idx)
+		bt = b->top;
+		if (blo.p2 < bt->idx)
 		{
 			push(b, a);
 			ft_printf("pa\n");
 		}
-		else if (blo.p1 < a->top->idx && a->top->idx <= blo.p2)
+		else if (blo.p1 < bt->idx && bt->idx <= blo.p2)
 		{
 			(push(b, a) && ro(a));
 			ft_printf("pa\nra\n");
 		}
-		else if (a->top->idx <= blo.p1)
+		else if (bt->idx <= blo.p1)
 		{
 			ro(b);
 			ft_printf("rb\n");
@@ -90,22 +96,24 @@ static void	trisec_btop(t_stack *a, t_stack *b, t_block blo)
 
 static void	trisec_bbot(t_stack *a, t_stack *b, t_block blo)
 {
-	int	idx;
+	int		idx;
+	t_node	*bb;
 
 	idx = 0 - 1;
 	while (++idx < blo.count)
 	{
-		if (blo.p2 < a->top->idx)
+		bb = b->top->next;
+		if (blo.p2 < bb->idx)
 		{
 			(rro(b) && push(b, a));
 			ft_printf("rrb\npa\n");
 		}
-		else if (blo.p1 < a->top->idx && a->top->idx <= blo.p2)
+		else if (blo.p1 < bb->idx && bb->idx <= blo.p2)
 		{
 			rro(b);
 			ft_printf("rrb\n");
 		}
-		else if (a->top->idx <= blo.p1)
+		else if (bb->idx <= blo.p1)
 		{
 			(rro(b) && push(b, a) && ro(a));
 			ft_printf("rrb\npa\nra\n");

@@ -37,5 +37,5 @@ int	main(int argc, char *argv[])
 	blo.start = 0;
 	blo.end = argc - 2;
 	sort_ps(a, b, blo);
-	clean_stack_sort(a, b, arr);
+	clean_all(a, b, arr);
 }
