@@ -18,6 +18,7 @@ int	main(int argc, char *argv[])
 	t_stack	*a;
 	t_stack	*b;
 	t_sort	*arr;
+	t_block	blo;
 	int		idx;
 
 	if (argc < 2)
@@ -32,6 +33,9 @@ int	main(int argc, char *argv[])
 	idx = -1;
 	while (++idx + 1 < argc)
 		insert_stack(a, arr[idx].num[0], arr[idx].num[2]);
-	
+	blo.pos = a_top;
+	blo.start = 0;
+	blo.end = argc - 2;
+	sort_ps(a, b, blo);
 	clean_stack_sort(a, b, arr);
 }

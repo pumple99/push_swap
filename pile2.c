@@ -15,11 +15,11 @@
 
 static void	pile_btop3(t_stack *a, t_stack *b)
 {
-	t_node  *t;
-    t_node  *p;
+	t_node	*t;
+	t_node	*p;
 
-    t = b->top;
-    p = b->top->prev;
+	t = b->top;
+	p = b->top->prev;
 	if (t->idx < p->idx && p->idx < p->prev->idx)
 		(push(b, a) && swap(b) && push(b, a) && swap(a) && push(b, a) && \
 		swap(a) && ft_printf("pa\nsb\npa\nsa\npa\nsa\n"));
@@ -42,11 +42,11 @@ static void	pile_btop3(t_stack *a, t_stack *b)
 
 void	pile_btop(t_stack *a, t_stack *b, t_block blo)
 {
-    t_node  *t;
-    t_node  *p;
+	t_node	*t;
+	t_node	*p;
 
-    t = b->top;
-    p = b->top->prev;
+	t = b->top;
+	p = b->top->prev;
 	if (blo.count == 1)
 		(push(b, a) && ft_printf("pa\n"));
 	else if (blo.count == 2)
@@ -63,11 +63,11 @@ void	pile_btop(t_stack *a, t_stack *b, t_block blo)
 
 static void	pile_bbot3(t_stack *a, t_stack *b)
 {
-	t_node  *bot;
-    t_node  *n;
+	t_node	*bot;
+	t_node	*n;
 
-    bot = b->top->next;
-    n = bot->next;
+	bot = b->top->next;
+	n = bot->next;
 	if (n->next->idx < n->idx && n->idx < bot->idx)
 		(rro(b) && push(b, a) && rro(b) && push(b, a) && rro(b) && \
 		push(b, a) && ft_printf("rrb\npa\nrrb\npa\nrrb\npa\n"));
@@ -90,18 +90,18 @@ static void	pile_bbot3(t_stack *a, t_stack *b)
 
 void	pile_bbot(t_stack *a, t_stack *b, t_block blo)
 {
-    t_node  *bot;
-    t_node  *n;
+	t_node	*bot;
+	t_node	*n;
 
-    bot = b->top->next;
-    n = bot->next;
+	bot = b->top->next;
+	n = bot->next;
 	if (blo.count == 1)
 		(rro(b) && push(b, a) && ft_printf("rrb\npa\n"));
 	else if (blo.count == 2)
 	{
 		if (n->idx > bot->idx)
 			(rro(b) && rro(b) && push(b, a) && push(b, a) && \
-            ft_printf("rrb\nrrb\npa\npa\n"));
+			ft_printf("rrb\nrrb\npa\npa\n"));
 		else if (n->idx < bot->idx)
 			(rro(b) && push(b, a) && rro(b) && push(b, a) && \
 			ft_printf("rrb\npa\nrrb\npa\n"));

@@ -53,7 +53,7 @@ typedef struct s_block
 
 //pile.c
 int		pile_print(t_stack *a, t_stack *b, t_block blo);
-void	pile_atop(t_stack *a, t_stack *b, t_block blo);
+void	pile_atop(t_stack *a, t_block blo);
 void	pile_abot(t_stack *a, t_stack *b, t_block blo);
 
 //pile2.c
