@@ -13,6 +13,26 @@
 #include "push_swap.h"
 #include "libft/pf_printf.h"
 
+int	pile_if_three(t_stack *a)
+{
+	t_node	*t;
+	t_node	*p;
+
+	t = a->top;
+	p = a->top->prev;
+	if (t->idx < p->prev->idx && p->prev->idx < p->idx)
+		(rro(a) || swap(a) || ft_printf("rra\nsa\n"));
+	else if (p->idx < t->idx && t->idx < p->prev->idx)
+		(swap(a) || ft_printf("sa\n"));
+	else if (p->prev->idx < t->idx && t->idx < p->idx)
+		(ro(a) || ft_printf("ra\n"));
+	else if (p->idx < p->prev->idx && p->prev->idx < t->idx)
+		(rro(a) || ft_printf("rra\n"));
+	else if (p->prev->idx < p->idx && p->idx < t->idx)
+		(ro(a) || swap(a) || t_printf("ra\nsa\n"));
+	return (0);
+}
+
 void	pile_atop(t_stack *a, t_block blo)
 {
 	t_node	*t;
