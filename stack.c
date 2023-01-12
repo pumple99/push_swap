@@ -13,11 +13,16 @@
 #include <stdlib.h>
 #include "push_swap.h"
 
-t_stack	*make_stack(void)
+t_stack	*make_stack(int *e)
 {
 	t_stack	*s;
 
 	s = (t_stack *)malloc(sizeof(t_stack));
+	if (s == 0)
+	{
+		*e = PS_ERR_MALLOC;
+		return (0);
+	}
 	s->top = 0;
 	s->arg_num = 0;
 	return (s);
@@ -30,11 +35,16 @@ int	is_stack_empty(t_stack *s)
 	return (0);
 }
 
-void	insert_stack(t_stack *s, int num, int idx)
+int	insert_stack(t_stack *s, int num, int idx, int *e)
 {
 	t_node	*n;
 
 	n = (t_node *)malloc(sizeof(t_node));
+	if (n == 0)
+	{
+		*e = PS_ERR_MALLOC;
+		return (*e);
+	}
 	n->num = num;
 	n->idx = idx;
 	if (is_stack_empty(s))
@@ -51,6 +61,7 @@ void	insert_stack(t_stack *s, int num, int idx)
 	}
 	s->top = n;
 	(s->arg_num)++;
+	return (0);
 }
 
 t_sort	pop_stack(t_stack *s)

@@ -13,6 +13,10 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
+# define PS_ERR_MALLOC 1
+# define PS_ERR_WRONG_INPUT 2
+# define PS_ERR_DUPLICATE_INPUT 3
+
 //arr[0] = num, arr[1] = input_idx, arr[2] = sort_idx
 typedef struct s_sort
 {
@@ -51,39 +55,41 @@ typedef struct s_block
 	t_pos	pos;
 }	t_block;
 
-//pile.c
-int		pile_print(t_stack *a, t_stack *b, t_block blo);
+//pile.c || pile2.c
+int		pile_print(t_stack *a, t_stack *b, t_block blo, int *e);
 void	pile_atop(t_stack *a, t_block blo);
-void	pile_abot(t_stack *a, t_stack *b, t_block blo);
-
-//pile2.c
-void	pile_btop(t_stack *a, t_stack *b, t_block blo);
-void	pile_bbot(t_stack *a, t_stack *b, t_block blo);
+void	pile_abot(t_stack *a, t_stack *b, t_block blo, int *e);
+void	pile_btop(t_stack *a, t_stack *b, t_block blo, int *e);
+void	pile_bbot(t_stack *a, t_stack *b, t_block blo, int *e);
 
 //sort.c
-int		sort_ps(t_stack *a, t_stack *b, t_block blo);
+int		start_sort(t_stack *a, t_stack *b, int total, int *e);
 
 //trisection.c
-void	trisec_print(t_stack *a, t_stack *b, t_block blo);
+void	trisec_print(t_stack *a, t_stack *b, t_block blo, int *e);
 
 //exit.c
-void	print_error_exit(t_stack *a, t_stack *b, t_sort *arr);
+void	print_error_exit(void);
 void	clean_all(t_stack *a, t_stack *b, t_sort *arr);
 
-//input.c
-int		atoi_or_exit(const char *str, t_stack *a, t_stack *b, t_sort *arr);
-void	find_idx_check_dup(int total, t_stack *a, t_stack *b, t_sort *arr);
+//input.c || input2.c
+int		atoi_or_exit(const char *str, int *e);
+int		find_idx_check_dup(int total, t_sort *arr, int *e);
+int		count_input(int argc, char *argv[]);
+t_sort	*make_input_arr(int total, int *e);
+int		assign_input_arr(int argc, char *argv[], t_sort *arr, int *e);
+int		stack_a_initialize(t_stack *a, t_sort *arr, int total, int *e);
 
 //stack.c
-t_stack	*make_stack(void);
+t_stack	*make_stack(int *e);
 int		is_stack_empty(t_stack *s);
-void	insert_stack(t_stack *s, int num, int idx);
+int		insert_stack(t_stack *s, int num, int idx, int *e);
 t_sort	pop_stack(t_stack *s);
 void	delete_stack(t_stack *s);
 
 //operation.c
 int		swap(t_stack *s);
-int		push(t_stack *src, t_stack *dest);
+int		push(t_stack *src, t_stack *dest, int *e);
 int		ro(t_stack *s);
 int		rro(t_stack *s);
 

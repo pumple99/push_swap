@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "push_swap.h"
 
 int	main(int argc, char *argv[])
@@ -18,24 +17,21 @@ int	main(int argc, char *argv[])
 	t_stack	*a;
 	t_stack	*b;
 	t_sort	*arr;
-	t_block	blo;
-	int		idx;
+	int		e;
+	int		total;
 
 	if (argc < 2)
 		return (0);
-	a = make_stack();
-	b = make_stack();
-	arr = (t_sort *)malloc(sizeof(t_sort) * (argc - 1));
-	idx = -1;
-	while (++idx + 1 < argc)
-		arr[idx].num[0] = atoi_or_exit(argv[argc - idx - 1], a, b, arr);
-	find_idx_check_dup(idx, a, b, arr);
-	idx = -1;
-	while (++idx + 1 < argc)
-		insert_stack(a, arr[idx].num[0], arr[idx].num[2]);
-	blo.pos = a_top;
-	blo.start = 0;
-	blo.end = argc - 2;
-	sort_ps(a, b, blo);
+	e = 0;
+	a = make_stack(&e);
+	b = make_stack(&e);
+	total = count_input(argc, argv);
+	arr = make_input_arr(total, &e);
+	(e || assign_input_arr(argc, argv, arr, &e));
+	(e || find_idx_check_dup(total, arr, &e));
+	(e || stack_a_initialize(a, arr, total, &e));
+	(e || start_sort(a, b, total, &e));
 	clean_all(a, b, arr);
+	if (e)
+		print_error_exit();
 }

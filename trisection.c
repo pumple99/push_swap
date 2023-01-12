@@ -13,7 +13,7 @@
 #include "push_swap.h"
 #include "libft/pf_printf.h"
 
-static void	trisec_atop(t_stack *a, t_stack *b, t_block blo)
+static void	trisec_atop(t_stack *a, t_stack *b, t_block blo, int *e)
 {
 	int		idx;
 	t_node	*at;
@@ -29,18 +29,18 @@ static void	trisec_atop(t_stack *a, t_stack *b, t_block blo)
 		}
 		else if (blo.p1 < at->idx && at->idx <= blo.p2)
 		{
-			push(a, b);
+			push(a, b, e);
 			ft_printf("pb\n");
 		}
 		else if (at->idx <= blo.p1)
 		{
-			(push(a, b) && ro(b));
+			(push(a, b, e) || ro(b));
 			ft_printf("pb\nrb\n");
 		}
 	}
 }
 
-static void	trisec_abot(t_stack *a, t_stack *b, t_block blo)
+static void	trisec_abot(t_stack *a, t_stack *b, t_block blo, int *e)
 {
 	int		idx;
 	t_node	*ab;
@@ -56,18 +56,18 @@ static void	trisec_abot(t_stack *a, t_stack *b, t_block blo)
 		}
 		else if (blo.p1 < ab->idx && ab->idx <= blo.p2)
 		{
-			(rro(a) && push(a, b));
+			(rro(a) || push(a, b, e));
 			ft_printf("rra\npb\n");
 		}
 		else if (ab->idx <= blo.p1)
 		{
-			(rro(a) && push(a, b) && ro(b));
+			(rro(a) || push(a, b, e) || ro(b));
 			ft_printf("rra\npb\nrb\n");
 		}
 	}
 }
 
-static void	trisec_btop(t_stack *a, t_stack *b, t_block blo)
+static void	trisec_btop(t_stack *a, t_stack *b, t_block blo, int *e)
 {
 	int		idx;
 	t_node	*bt;
@@ -78,12 +78,12 @@ static void	trisec_btop(t_stack *a, t_stack *b, t_block blo)
 		bt = b->top;
 		if (blo.p2 < bt->idx)
 		{
-			push(b, a);
+			push(b, a, e);
 			ft_printf("pa\n");
 		}
 		else if (blo.p1 < bt->idx && bt->idx <= blo.p2)
 		{
-			(push(b, a) && ro(a));
+			(push(b, a, e) || ro(a));
 			ft_printf("pa\nra\n");
 		}
 		else if (bt->idx <= blo.p1)
@@ -94,7 +94,7 @@ static void	trisec_btop(t_stack *a, t_stack *b, t_block blo)
 	}
 }
 
-static void	trisec_bbot(t_stack *a, t_stack *b, t_block blo)
+static void	trisec_bbot(t_stack *a, t_stack *b, t_block blo, int *e)
 {
 	int		idx;
 	t_node	*bb;
@@ -105,7 +105,7 @@ static void	trisec_bbot(t_stack *a, t_stack *b, t_block blo)
 		bb = b->top->next;
 		if (blo.p2 < bb->idx)
 		{
-			(rro(b) && push(b, a));
+			(rro(b) || push(b, a, e));
 			ft_printf("rrb\npa\n");
 		}
 		else if (blo.p1 < bb->idx && bb->idx <= blo.p2)
@@ -115,20 +115,20 @@ static void	trisec_bbot(t_stack *a, t_stack *b, t_block blo)
 		}
 		else if (bb->idx <= blo.p1)
 		{
-			(rro(b) && push(b, a) && ro(a));
+			(rro(b) || push(b, a, e) || ro(a));
 			ft_printf("rrb\npa\nra\n");
 		}
 	}
 }
 
-void	trisec_print(t_stack *a, t_stack *b, t_block blo)
+void	trisec_print(t_stack *a, t_stack *b, t_block blo, int *e)
 {
 	if (blo.pos == a_top)
-		trisec_atop(a, b, blo);
+		trisec_atop(a, b, blo, e);
 	else if (blo.pos == a_bot)
-		trisec_abot(a, b, blo);
+		trisec_abot(a, b, blo, e);
 	else if (blo.pos == b_top)
-		trisec_btop(a, b, blo);
+		trisec_btop(a, b, blo, e);
 	else if (blo.pos == b_bot)
-		trisec_bbot(a, b, blo);
+		trisec_bbot(a, b, blo, e);
 }

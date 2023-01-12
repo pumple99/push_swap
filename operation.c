@@ -18,11 +18,11 @@ int	swap(t_stack *s)
 	t_node	*new_top;
 
 	if (s->arg_num < 2)
-		return (1);
+		return (0);
 	else if (s->arg_num == 2)
 	{
 		s->top = s->top->next;
-		return (1);
+		return (0);
 	}
 	new_top = s->top->prev;
 	new_top->prev->next = s->top;
@@ -33,32 +33,31 @@ int	swap(t_stack *s)
 	new_top->next = last;
 	new_top->prev = s->top;
 	s->top = new_top;
-	return (1);
+	return (0);
 }
 
-int	push(t_stack *src, t_stack *dest)
+int	push(t_stack *src, t_stack *dest, int *e)
 {
 	t_sort	num;
 
 	if (is_stack_empty(src))
-		return (1);
+		return (0);
 	num = pop_stack(src);
-	insert_stack(dest, num.num[0], num.num[2]);
-	return (1);
+	return (insert_stack(dest, num.num[0], num.num[2], e));
 }
 
 int	ro(t_stack *s)
 {
 	if (s->arg_num < 2)
-		return (1);
+		return (0);
 	s->top = s->top->prev;
-	return (1);
+	return (0);
 }
 
 int	rro(t_stack *s)
 {
 	if (s->arg_num < 2)
-		return (1);
+		return (0);
 	s->top = s->top->next;
-	return (1);
+	return (0);
 }

@@ -51,7 +51,7 @@ static void	quick(t_sort *arr, int l, int r, int sort_std)
 		quick(arr, left, r, sort_std);
 }
 
-void	find_idx_check_dup(int total, t_stack *a, t_stack *b, t_sort *arr)
+int	find_idx_check_dup(int total, t_sort *arr, int *e)
 {
 	int	idx;
 
@@ -63,11 +63,15 @@ void	find_idx_check_dup(int total, t_stack *a, t_stack *b, t_sort *arr)
 	while (++idx < total - 1)
 	{
 		if (arr[idx].num[0] == arr[idx + 1].num[0])
-			print_error_exit(a, b, arr);
+		{
+			*e = PS_ERR_DUPLICATE_INPUT;
+			return (*e);
+		}
 		arr[idx].num[2] = idx;
 	}
 	arr[idx].num[2] = idx;
 	quick(arr, 0, total - 1, 1);
+	return (0);
 }
 
 static int	is_wrong_input(const char *str)
@@ -75,7 +79,7 @@ static int	is_wrong_input(const char *str)
 	int		len;
 
 	len = 0;
-	while (str[len])
+	while (str[len] && str[len] != ' ')
 	{
 		if (str[len] < '0' || '9' < str[len])
 			return (1);
@@ -86,7 +90,7 @@ static int	is_wrong_input(const char *str)
 	return (0);
 }
 
-int	atoi_or_exit(const char *str, t_stack *a, t_stack *b, t_sort *arr)
+int	atoi_or_exit(const char *str, int *e)
 {
 	int			index;
 	long long	num;	
@@ -95,11 +99,11 @@ int	atoi_or_exit(const char *str, t_stack *a, t_stack *b, t_sort *arr)
 	if (str[0] == '-' || str[0] == '+')
 		index++;
 	if (is_wrong_input(str + index))
-		print_error_exit(a, b, arr);
+		*e = PS_ERR_WRONG_INPUT;
 	num = ft_atoi(str);
 	if (num > INT_MAX || num < INT_MIN)
-		print_error_exit(a, b, arr);
-	if (num == 0 && (str[0] != '0' || str[1] != 0))
-		print_error_exit(a, b, arr);
+		*e = PS_ERR_WRONG_INPUT;
+	if (num == 0 && (str[0] != '0' || (str[1] != 0 && str[1] != ' ')))
+		*e = PS_ERR_WRONG_INPUT;
 	return ((int)num);
 }

@@ -20,7 +20,7 @@ static int	blo_info_big(t_block blo, t_block *new_blo)
 		new_blo->pos = a_bot;
 	else
 		new_blo->pos = a_top;
-	return (1);
+	return (0);
 }
 
 static int	blo_info_mid(t_block blo, t_block *new_blo)
@@ -31,7 +31,7 @@ static int	blo_info_mid(t_block blo, t_block *new_blo)
 		new_blo->pos = a_bot;
 	else
 		new_blo->pos = b_top;
-	return (1);
+	return (0);
 }
 
 static int	blo_info_small(t_block blo, t_block *new_blo)
@@ -42,13 +42,15 @@ static int	blo_info_small(t_block blo, t_block *new_blo)
 		new_blo->pos = a_bot;
 	else
 		new_blo->pos = b_bot;
-	return (1);
+	return (0);
 }
 
-int	sort_ps(t_stack *a, t_stack *b, t_block blo)
+static int	sort_ps(t_stack *a, t_stack *b, t_block blo, int *e)
 {
 	t_block	temp;
 
+	if (*e)
+		return (*e);
 	blo.count = blo.end - blo.start + 1;
 	blo.p1 = blo.start + (int)((float)blo.count / 3) - 1;
 	blo.p2 = blo.start + (int)((float)blo.count / 3 * 2) - 1;
@@ -57,10 +59,20 @@ int	sort_ps(t_stack *a, t_stack *b, t_block blo)
 	if (blo.pos == b_bot && b->arg_num == blo.count)
 		blo.pos = b_top;
 	if (blo.count < 4)
-		return (pile_print(a, b, blo));
-	trisec_print(a, b, blo);
-	(blo_info_big(blo, &temp) && sort_ps(a, b, temp));
-	(blo_info_mid(blo, &temp) && sort_ps(a, b, temp));
-	(blo_info_small(blo, &temp) && sort_ps(a, b, temp));
-	return (1);
+		return (pile_print(a, b, blo, e));
+	trisec_print(a, b, blo, e);
+	(blo_info_big(blo, &temp) || sort_ps(a, b, temp, e));
+	(blo_info_mid(blo, &temp) || sort_ps(a, b, temp, e));
+	(blo_info_small(blo, &temp) || sort_ps(a, b, temp, e));
+	return (0);
+}
+
+int	start_sort(t_stack *a, t_stack *b, int total, int *e)
+{
+	t_block	blo;
+
+	blo.pos = a_top;
+	blo.start = 0;
+	blo.end = total - 1;
+	return (sort_ps(a, b, blo, e));
 }

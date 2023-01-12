@@ -21,9 +21,8 @@ void	clean_all(t_stack *a, t_stack *b, t_sort *arr)
 	delete_stack(b);
 }
 
-void	print_error_exit(t_stack *a, t_stack *b, t_sort *arr)
+void	print_error_exit(void)
 {
-	clean_all(a, b, arr);
 	write(2, "Error\n", 6);
 	exit(1);
 }
