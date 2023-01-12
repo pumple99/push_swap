@@ -29,7 +29,7 @@ int	pile_if_three(t_stack *a)
 	else if (p->idx < p->prev->idx && p->prev->idx < t->idx)
 		(rro(a) || ft_printf("rra\n"));
 	else if (p->prev->idx < p->idx && p->idx < t->idx)
-		(ro(a) || swap(a) || t_printf("ra\nsa\n"));
+		(ro(a) || swap(a) || ft_printf("ra\nsa\n"));
 	return (0);
 }
 
