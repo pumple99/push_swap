@@ -45,6 +45,32 @@ static int	blo_info_small(t_block blo, t_block *new_blo)
 	return (0);
 }
 
+/*
+#include <stdio.h>
+
+int	show_stack(t_stack *a, t_stack *b)
+{
+	int		idx;
+	t_node	*temp;
+
+	idx = -1;
+	temp = a->top;
+	while (++idx < a->arg_num)
+	{
+		printf("aaaa: num: %d, idx: %d\n", temp->num, temp->idx);
+		temp = temp->prev;
+	}
+	idx = -1;
+	temp = b->top;
+	while (++idx < b->arg_num)
+	{
+		printf("bbbb: num: %d, idx: %d\n", temp->num, temp->idx);
+		temp = temp->prev;
+	}
+	return (0);
+}
+*/
+
 static int	sort_ps(t_stack *a, t_stack *b, t_block blo, int *e)
 {
 	t_block	temp;

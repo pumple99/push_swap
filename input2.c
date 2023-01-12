@@ -81,10 +81,7 @@ int	assign_input_arr(int argc, char *argv[], t_sort *arr, int *e)
 
 int	stack_a_initialize(t_stack *a, t_sort *arr, int total, int *e)
 {
-	int	idx;
-
-	idx = -1;
-	while (++idx < total && *e == 0)
-		insert_stack(a, arr[idx].num[0], arr[idx].num[2], e);
+	while (0 <= --total && *e == 0)
+		insert_stack(a, arr[total].num[0], arr[total].num[2], e);
 	return (0);
 }

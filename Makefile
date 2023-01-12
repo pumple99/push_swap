@@ -27,18 +27,16 @@ OBJS_M = $(SRCS_M:.c=.o)
 OBJS_B = $(SRCS_B:.c=.o)
 DEPS = $(OBJS_C:.o=.d) $(OBJS_B:.o=.d) $(OBJS_M:.o=.d) $(BONUS).d $(NAME).d
 
-all : $(LIB)
-	make all_temp
-
-all_temp : $(OBJS_M) $(OBJS_C)
+$(NAME) :: $(LIB)
+$(NAME) :: $(OBJS_M) $(OBJS_C)
 	$(CC) $(CFLAGS) -I. -I$(LIB_DIR) -MMD -o $(NAME) $^ $(LIB) $(DEBUG_FLAGS)
 
-$(NAME) : all
+all : $(NAME)
 
-bonus : $(LIB)
-	make bonus_temp
+bonus : $(BONUS)
 
-bonus_temp : $(OBJS_B) $(OBJS_C)
+$(BONUS) :: $(LIB)
+$(BONUS) :: $(OBJS_B) $(OBJS_C)
 	$(CC) $(CFLAGS) -I. -I$(LIB_DIR) -MMD -o $(BONUS) $^ $(LIB) $(DEBUG_FLAGS)
 
 %.o : %.c

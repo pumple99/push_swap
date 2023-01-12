@@ -97,5 +97,5 @@ int	pile_print(t_stack *a, t_stack *b, t_block blo, int *e)
 		pile_btop(a, b, blo, e);
 	else if (blo.pos == b_bot)
 		pile_bbot(a, b, blo, e);
-	return (1);
+	return (0);
 }
