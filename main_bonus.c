@@ -6,12 +6,12 @@
 /*   By: seunghoy <seunghoy@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 19:33:47 by seunghoy          #+#    #+#             */
-/*   Updated: 2023/01/06 20:59:25 by seunghoy         ###   ########.fr       */
+/*   Updated: 2023/01/13 21:13:37 by seunghoy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "libft/get_next_line_bonus.h"
+#include "libft/gnl.h"
 #include "libft/pf_printf.h"
 #include "libft/libft.h"
 #include "push_swap.h"

@@ -6,7 +6,7 @@
 #    By: seunghoy <seunghoy@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/12 16:45:12 by seunghoy          #+#    #+#              #
-#    Updated: 2023/01/06 20:03:47 by seunghoy         ###   ########.fr        #
+#    Updated: 2023/01/13 21:11:58 by seunghoy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,8 +57,8 @@ SRCS = ft_isalpha.c \
               ft_lstclear_bonus.c \
               ft_lstiter_bonus.c \
               ft_lstmap_bonus.c \
-       get_next_line_bonus.c \
-       get_next_line_utils_bonus.c \
+       gnl.c \
+       gnl_utils.c \
               pf_printf.c \
               pf_parse.c \
               pf_len.c \
