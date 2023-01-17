@@ -102,7 +102,5 @@ int	start_sort(t_stack *a, t_stack *b, int total, int *e)
 	blo.pos = a_top;
 	blo.start = 0;
 	blo.end = total - 1;
-	if (total == 3)
-		return (pile_if_three(a));
 	return (sort_ps(a, b, blo, e));
 }
