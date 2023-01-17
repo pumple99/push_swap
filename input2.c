@@ -13,6 +13,24 @@
 #include <stdlib.h>
 #include "push_swap.h"
 
+int	is_complete(t_stack *a, t_stack *b)
+{
+	int		idx;
+	t_node	*temp;
+
+	if (!is_stack_empty(b))
+		return (0);
+	idx = 0;
+	temp = a->top;
+	while (++idx < a->arg_num)
+	{
+		if (temp->num > temp->prev->num)
+			return (0);
+		temp = temp->prev;
+	}
+	return (1);
+}
+
 int	count_input(int argc, char *argv[])
 {
 	int		is_in_word;

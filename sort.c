@@ -97,6 +97,8 @@ int	start_sort(t_stack *a, t_stack *b, int total, int *e)
 {
 	t_block	blo;
 
+	if (is_complete(a, b))
+		return (0);
 	blo.pos = a_top;
 	blo.start = 0;
 	blo.end = total - 1;

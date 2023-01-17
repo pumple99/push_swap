@@ -74,6 +74,7 @@ void	print_error_exit(void);
 void	clean_all(t_stack *a, t_stack *b, t_sort *arr);
 
 //input.c || input2.c
+int		is_complete(t_stack *a, t_stack *b);
 int		atoi_or_exit(const char *str, int *e);
 int		find_idx_check_dup(int total, t_sort *arr, int *e);
 int		count_input(int argc, char *argv[]);

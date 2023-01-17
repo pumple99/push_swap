@@ -16,24 +16,6 @@
 #include "libft/libft.h"
 #include "push_swap.h"
 
-static int	is_complete(t_stack *a, t_stack *b)
-{
-	int		idx;
-	t_node	*temp;
-
-	if (!is_stack_empty(b))
-		return (0);
-	idx = 0;
-	temp = a->top;
-	while (++idx < a->arg_num)
-	{
-		if (temp->num > temp->prev->num)
-			return (0);
-		temp = temp->prev;
-	}
-	return (1);
-}
-
 static void	exe_or_exit(t_stack *a, t_stack *b, char temp[], int *e)
 {
 	if (!ft_strncmp(temp, "sa", 3))
