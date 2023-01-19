@@ -31,42 +31,41 @@ int	is_complete(t_stack *a, t_stack *b)
 	return (1);
 }
 
-int	count_input(int argc, char *argv[])
+int	count_input(int argc, char *argv[], int *total, int *e)
 {
 	int		is_in_word;
 	int		count;
-	int		idx;
 	char	*str;
 
-	count = 0;
-	idx = 0;
-	while (++idx < argc)
+	while (0 < --argc)
 	{
+		count = 0;
 		is_in_word = 0;
-		str = argv[idx];
+		str = argv[argc];
 		while (*str)
 		{
 			if (!is_in_word && *str != ' ')
 			{
-				is_in_word = 1;
 				count++;
+				is_in_word = 1;
 			}
 			else if (is_in_word && *str == ' ')
 				is_in_word = 0;
 			str++;
 		}
+		if (count == 0)
+			*e = PS_ERR_WRONG_INPUT;
+		*total += count;
 	}
-	return (count);
+	return (0);
 }
 
-t_sort	*make_input_arr(int total, int *e)
+int	*make_input_arr(int total, t_sort **arr, int *e)
 {
-	t_sort	*arr;
-
-	arr = (t_sort *)malloc(sizeof(t_sort) * total);
-	if (arr == 0)
+	*arr = (t_sort *)malloc(sizeof(t_sort) * total);
+	if (*arr == 0)
 		*e = PS_ERR_MALLOC;
-	return (arr);
+	return (0);
 }
 
 int	assign_input_arr(int argc, char *argv[], t_sort *arr, int *e)

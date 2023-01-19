@@ -20,13 +20,15 @@ int	main(int argc, char *argv[])
 	int		e;
 	int		total;
 
+	if (argc < 2)
+		return (0);
 	e = 0;
+	total = 0;
+	arr = 0;
 	a = make_stack(&e);
 	b = make_stack(&e);
-	total = count_input(argc, argv);
-	if (total < 1)
-		return (0);
-	arr = make_input_arr(total, &e);
+	(e || count_input(argc, argv, &total, &e));
+	(e || make_input_arr(total, &arr, &e));
 	(e || assign_input_arr(argc, argv, arr, &e));
 	(e || find_idx_check_dup(total, arr, &e));
 	(e || stack_a_initialize(a, arr, total, &e));

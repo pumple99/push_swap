@@ -76,8 +76,8 @@ void	clean_all(t_stack *a, t_stack *b, t_sort *arr);
 int		is_complete(t_stack *a, t_stack *b);
 int		atoi_or_exit(const char *str, int *e);
 int		find_idx_check_dup(int total, t_sort *arr, int *e);
-int		count_input(int argc, char *argv[]);
-t_sort	*make_input_arr(int total, int *e);
+int		count_input(int argc, char *argv[], int *total, int *e);
+int		*make_input_arr(int total, t_sort **arr, int *e);
 int		assign_input_arr(int argc, char *argv[], t_sort *arr, int *e);
 int		stack_a_initialize(t_stack *a, t_sort *arr, int total, int *e);
 
