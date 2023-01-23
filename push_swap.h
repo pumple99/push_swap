@@ -16,6 +16,8 @@
 # define PS_ERR_MALLOC 1
 # define PS_ERR_WRONG_INPUT 2
 # define PS_ERR_DUPLICATE_INPUT 3
+# define PS_ERR_GNL 4
+# define PS_ERR_PF 5
 
 //arr[0] = num, arr[1] = input_idx, arr[2] = sort_idx
 typedef struct s_sort
@@ -88,10 +90,21 @@ int		insert_stack(t_stack *s, int num, int idx, int *e);
 t_sort	pop_stack(t_stack *s);
 void	delete_stack(t_stack *s);
 
-//operation.c
+//operation.c || operation2.c operation3.c
 int		swap(t_stack *s);
 int		push(t_stack *src, t_stack *dest, int *e);
 int		ro(t_stack *s);
 int		rro(t_stack *s);
+int		sa(t_stack *a, int *e);
+int		sb(t_stack *b, int *e);
+int		ss(t_stack *a, t_stack *b, int *e);
+int		pa(t_stack *b, t_stack *a, int *e);
+int		pb(t_stack *a, t_stack *b, int *e);
+int		ra(t_stack *a, int *e);
+int		rb(t_stack *b, int *e);
+int		rr(t_stack *a, t_stack *b, int *e);
+int		rra(t_stack *a, int *e);
+int		rrb(t_stack *b, int *e);
+int		rrr(t_stack *a, t_stack *b, int *e);
 
 #endif

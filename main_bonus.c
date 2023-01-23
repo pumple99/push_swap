@@ -44,24 +44,35 @@ static void	exe_or_exit(t_stack *a, t_stack *b, char temp[], int *e)
 		*e = PS_ERR_WRONG_INPUT;
 }
 
+static void	print_result(int is_sorted, int *e)
+{
+	int	return_print;
+	
+	if (is_sorted)
+		return_print = ft_printf("OK\n");
+	else
+		return_print = ft_printf("KO\n");
+	if (return_print < 0)
+		*e = PS_ERR_PF;
+}
+
 static int	exe_input_op(t_stack *a, t_stack *b, int *e)
 {
 	char	*in;
 
 	in = get_next_line(0);
+	if (in == (char *)1)
+		*e = PS_ERR_GNL;
 	while (in && *e == 0)
 	{
 		exe_or_exit(a, b, in, e);
 		free(in);
 		in = get_next_line(0);
+		if (in == (char *)1)
+			*e = PS_ERR_GNL;
 	}
 	if (*e == 0)
-	{
-		if (is_complete(a, b))
-			ft_printf("OK\n");
-		else
-			ft_printf("KO\n");
-	}
+		print_result(is_complete(a, b), e);
 	return (*e);
 }
 

@@ -87,7 +87,7 @@ static char	*re_check(int fd, int *err, t_bnode **bnode, char *re_str)
 		free(*backup);
 		*backup = 0;
 		delete_node(fd, bnode);
-		return (0);
+		return ((char *)1);
 	}
 	if (re_str && re_str[0] == 0)
 	{

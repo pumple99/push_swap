@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include "libft/pf_printf.h"
 
 int	swap(t_stack *s)
 {
@@ -59,5 +60,16 @@ int	rro(t_stack *s)
 	if (s->arg_num < 2)
 		return (0);
 	s->top = s->top->next;
+	return (0);
+}
+
+int	ss(t_stack *a, t_stack *b, int *e)
+{
+	(swap(a) || swap(b));
+	if (ft_print("ss\n") < 0)
+	{
+		*e = PS_ERR_PF;
+		return (1);
+	}
 	return (0);
 }
