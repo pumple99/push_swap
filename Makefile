@@ -18,7 +18,7 @@ DEBUG_FLAGS = -g
 LIB = libft.a
 LIB_DIR = ./libft
 
-SRCS_C = exit.c input.c input2.c operation.c stack.c
+SRCS_C = exit.c input.c input2.c operation.c operation2.c operation3.c stack.c
 SRCS_M = main.c sort.c trisection.c pile.c pile2.c
 SRCS_B = main_bonus.c
 
